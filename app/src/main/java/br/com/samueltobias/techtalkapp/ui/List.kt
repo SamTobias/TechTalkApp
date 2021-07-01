@@ -1,5 +1,7 @@
 package br.com.samueltobias.techtalkapp.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,10 +14,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.HourglassEmpty
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -69,24 +73,22 @@ private fun AppBar(onRefresh: () -> Unit) {
 }
 
 @Composable
-fun TalksList(talks: List<Talk>) {
-    LazyColumn {
-        items(talks) { talk ->
-            TalkCard(talk = talk, modifier = Modifier)
-        }
+fun TalksList(talks: List<Talk>) = LazyColumn {
+    items(talks) { talk ->
+        TalkCard(talk = talk)
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class, ExperimentalAnimationApi::class)
 @Composable
-fun TalkCard(
-    talk: Talk,
-    modifier: Modifier
-) {
+fun TalkCard(talk: Talk) {
+    var visible by remember { mutableStateOf(false) }
     Card(
-        modifier = modifier
+        modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth(),
-        elevation = 8.dp
+        elevation = 8.dp,
+        onClick = { if (talk.subjects.isNotEmpty()) visible = !visible }
     ) {
         Column {
             val typography = MaterialTheme.typography
@@ -99,7 +101,7 @@ fun TalkCard(
                     .height(180.dp)
                     .fillMaxWidth()
             )
-            Column(modifier.padding(16.dp)) {
+            Column(Modifier.padding(16.dp)) {
                 Text(text = talk.title, style = typography.h6)
                 Text(text = talk.speaker, style = typography.body2)
                 Row(
@@ -128,15 +130,19 @@ fun TalkCard(
                 }
 
                 if (talk.subjects.isNotEmpty()) {
-                    Spacer(modifier = Modifier.padding(8.dp))
-                    Text(
-                        text = stringResource(R.string.subjects),
-                        style = typography.body2
-                    )
-                    Spacer(modifier = Modifier.padding(8.dp))
-                    Row {
-                        talk.subjects.forEach { subject ->
-                            Chip(subject)
+                    AnimatedVisibility(visible = visible) {
+                        Column {
+                            Spacer(modifier = Modifier.padding(8.dp))
+                            Text(
+                                text = stringResource(R.string.subjects),
+                                style = typography.body2
+                            )
+                            Spacer(modifier = Modifier.padding(8.dp))
+                            Row {
+                                talk.subjects.forEach { subject ->
+                                    Chip(subject)
+                                }
+                            }
                         }
                     }
                 }
@@ -180,8 +186,7 @@ fun ExampleTalkCard() {
                 date = "01/07/2021 16:00",
                 duration = 60,
                 subjects = emptySet()
-            ),
-            modifier = Modifier
+            )
         )
     }
 }
@@ -197,8 +202,7 @@ fun ExampleTalkCardWithSubjects() {
                 date = "01/07/2021 16:00",
                 duration = 60,
                 subjects = setOf("Android", "Kotlin", "Jetpack Compose")
-            ),
-            modifier = Modifier
+            )
         )
     }
 }

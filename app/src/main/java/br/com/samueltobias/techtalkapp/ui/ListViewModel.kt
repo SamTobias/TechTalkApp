@@ -13,11 +13,7 @@ import kotlinx.coroutines.launch
 
 class ListViewModel : ViewModel() {
     val talks = MutableLiveData<List<Talk>>()
-    lateinit var useCase: GetTalksUseCase
-
-    init {
-        useCase = GetTalksUseCaseImpl(TalkRepositoryImpl(MockRetrofitClientApi.getApi()))
-    }
+    private val useCase: GetTalksUseCase = GetTalksUseCaseImpl(TalkRepositoryImpl(MockRetrofitClientApi.getApi()))
 
     fun getTalks() {
         viewModelScope.launch(Dispatchers.IO) {
