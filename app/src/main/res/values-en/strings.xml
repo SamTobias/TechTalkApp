@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tech Talk App</string>
+    <string name="date">Date</string>
+    <string name="duration">Duration</string>
+    <string name="subjects">Subjects:</string>
+    <string name="reload">Reload</string>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Tech Talk App</string>
+    <string name="date">Data</string>
+    <string name="duration">Duração</string>
+    <string name="subjects">Assuntos:</string>
+    <string name="reload">Recarregar</string>
+</resources>
