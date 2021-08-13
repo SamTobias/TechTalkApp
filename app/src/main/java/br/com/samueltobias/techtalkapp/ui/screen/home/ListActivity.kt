@@ -1,4 +1,4 @@
-package br.com.samueltobias.techtalkapp.ui
+package br.com.samueltobias.techtalkapp.ui.screen.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

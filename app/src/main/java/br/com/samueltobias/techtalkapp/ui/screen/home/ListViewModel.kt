@@ -1,4 +1,4 @@
-package br.com.samueltobias.techtalkapp.ui
+package br.com.samueltobias.techtalkapp.ui.screen.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
