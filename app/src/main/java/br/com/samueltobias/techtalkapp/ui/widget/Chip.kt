@@ -11,6 +11,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.samueltobias.techtalkapp.ui.theme.PantoneYellow
@@ -19,7 +20,7 @@ import br.com.samueltobias.techtalkapp.ui.theme.PantoneYellow
 fun Chip(text: String) {
     Surface(
         modifier = Modifier
-            .padding(end = 10.dp, bottom = 10.dp)
+            .padding(all = 5.dp)
             .defaultMinSize(minWidth = 30.dp),
         shape = RoundedCornerShape(16.dp),
         border = BorderStroke(
@@ -37,4 +38,10 @@ fun Chip(text: String) {
             )
         }
     }
+}
+
+@Preview
+@Composable
+fun ChipPreview() {
+    Chip(text = "Chip")
 }

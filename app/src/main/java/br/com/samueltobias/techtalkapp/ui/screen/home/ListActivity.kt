@@ -18,40 +18,12 @@ class ListActivity : ComponentActivity() {
                 }
             }
         }
-
-        println("Create")
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        println("Start")
     }
 
     override fun onResume() {
         super.onResume()
 
         refresh()
-
-        println("Resume")
-    }
-
-    override fun onPause() {
-        println("Pause")
-
-        super.onPause()
-    }
-
-    override fun onStop() {
-        println("Stop")
-
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        println("Destroy")
-
-        super.onDestroy()
     }
 
     private fun refresh() {

@@ -67,13 +67,19 @@ fun TalksList(talks: List<Talk>) = LazyColumn {
     }
 }
 
-
 @Preview
 @Composable
 fun ListScreenExample() {
     TechTalkAppTheme {
         val liveData = MutableLiveData(
             listOf(
+                Talk(
+                    title = "Conhecendo o desenvolvimento Android",
+                    speaker = "Samuel Tobias",
+                    date = "01/07/2021 16:00",
+                    duration = 60,
+                    subjects = setOf("Android", "Kotlin", "Jetpack Compose")
+                ),
                 Talk(
                     title = "Conhecendo o desenvolvimento Android",
                     speaker = "Samuel Tobias",
